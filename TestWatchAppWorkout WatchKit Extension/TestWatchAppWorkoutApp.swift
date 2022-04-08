@@ -9,11 +9,17 @@ import SwiftUI
 
 @main
 struct TestWatchAppWorkoutApp: App {
+    @StateObject var workoutManager = WorkoutManager()
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                StartView()
             }
+            .sheet(isPresented: $workoutManager.showingSummaryView, content: {
+                SummaryView()
+            })
+            .environmentObject(workoutManager)
         }
 
         WKNotificationScene(controller: NotificationController.self, category: "myCategory")

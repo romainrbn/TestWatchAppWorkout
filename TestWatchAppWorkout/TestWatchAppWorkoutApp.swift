@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TestWatchAppWorkoutApp: App {
+    
+    @StateObject var viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PhoneStartView()
+                .environmentObject(viewModel)
         }
     }
 }

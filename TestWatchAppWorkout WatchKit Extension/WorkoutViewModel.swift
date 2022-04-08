@@ -19,6 +19,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
     
     @Published var trainingStatus = TrainingStatus.stopped
     
+    @Published var secondsElapsed: Int = 0
+    
     var session: WCSession
     
     let countPerMinuteUnit = HKUnit(from: "count/min")
@@ -26,6 +28,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
     var workoutSession: HKWorkoutSession?
     
     var healthStore: HKHealthStore?
+    
+    var builder: HKLiveWorkoutBuilder?
+    
+    var timer = Timer()
     
     init(session: WCSession = .default) {
         self.session = session
@@ -46,10 +52,14 @@ class WorkoutViewModel: NSObject, ObservableObject {
             workoutSession = try HKWorkoutSession(healthStore: healthStore!, configuration: workoutConfiguration)
             self.workoutSession?.delegate = self
             self.workoutSession?.startActivity(with: workoutStartDate)
-        //    self.changeTrainingStatus(to: .started)
         } catch {
             print("Unable to create workout session...")
+            return
         }
+        
+        self.builder = workoutSession!.associatedWorkoutBuilder()
+        self.builder?.delegate = self
+        self.builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore!, workoutConfiguration: workoutConfiguration)
         
         requestHealthKitAuthorization(healthStore: healthStore!) { [weak self] (result) in
             
@@ -65,15 +75,21 @@ class WorkoutViewModel: NSObject, ObservableObject {
         }
     }
     
+    func resumeSession() {
+        self.workoutSession?.resume()
+        createTimer()
+    }
+    
     func pauseWorkout() {
         self.workoutSession?.pause()
-      //  self.changeTrainingStatus(to: .paused)
+        self.timer.invalidate()
     }
     
     func stopWorkout() {
         self.workoutSession?.stopActivity(with: Date())
         self.workoutSession?.end()
-     //   self.changeTrainingStatus(to: .stopped)
+        self.timer.invalidate()
+        self.secondsElapsed = 0
     }
     
     private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Result<Bool, Error>) -> ()) {
@@ -95,8 +111,17 @@ class WorkoutViewModel: NSObject, ObservableObject {
         
         print("Create stream for heart rate")
         
+        builder?.beginCollection(withStart: workoutStartDate) { success, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        createTimer()
+        
         let predicate = HKQuery.predicateForSamples(withStart: workoutStartDate, end: nil, options: .strictStartDate)
         let type = HKObjectType.quantityType(forIdentifier: .heartRate)
+        
         let heartRateQuery = HKAnchoredObjectQuery(type: type!, predicate: predicate, anchor: nil, limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, anchor, error in
         }
         
@@ -125,11 +150,21 @@ class WorkoutViewModel: NSObject, ObservableObject {
         }
     }
     
-//    private func changeTrainingStatus(to status: TrainingStatus) {
-//        self.trainingStatus = status
-//
-//        self.session.sendMessage(["trainingStatus": status.rawValue], replyHandler: nil)
-//    }
+    private func createTimer() {
+        var startTime = Date()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { time in
+                let current = Date()
+                let diffComponents = Calendar.current.dateComponents([.second, .nanosecond], from: startTime, to: current)
+                let seconds = (diffComponents.second ?? 0) + (diffComponents.nanosecond ?? 0) / 1_000_000_000
+                self.secondsElapsed += seconds
+                startTime = current
+            })
+            
+            self.timer.fire()
+        }
+    }
 }
 
 extension WorkoutViewModel: WCSessionDelegate {
@@ -140,11 +175,22 @@ extension WorkoutViewModel: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        DispatchQueue.main.async {
-            if message["message"] as? String == "" {
-                self.heartRateLabelText = "- bpm"
-            } else {
-                self.heartRateLabelText = message["message"] as? String ?? "Unknown"
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            let trainingStatusMessage = message["trainingStatus"] as? String
+            
+            if let trainingStatusMessage = trainingStatusMessage, let workoutSession = self.workoutSession {
+                switch TrainingStatusHelper.shared.getValueFromString(strValue: trainingStatusMessage) {
+                    case .stopped:
+                        self.stopWorkout()
+                    case .started:
+                        workoutSession.startActivity(with: Date())
+                    case .restarted:
+                        self.resumeSession()
+                    case .paused:
+                        self.pauseWorkout()
+                }
             }
         }
     }
@@ -154,11 +200,9 @@ extension WorkoutViewModel: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
         DispatchQueue.main.async {
             self.trainingStatus = toState.statusValue()
-            self.session.sendMessage(["trainingStatus": toState.statusValue()], replyHandler: nil) { error in
+            self.session.sendMessage(["trainingStatus": toState.statusValue().rawValue], replyHandler: nil) { error in
                 print("Error sending message: \(error.localizedDescription)")
             }
-
-            
         }
     }
     
@@ -167,23 +211,26 @@ extension WorkoutViewModel: HKWorkoutSessionDelegate {
     }
 }
 
-extension HKWorkoutSessionState {
-    func statusValue() -> TrainingStatus {
-        switch self {
-        case .notStarted:
-            return .stopped
-        case .running:
-            return .started
-        case .ended:
-            return .stopped
-        case .paused:
-            return .paused
-        case .prepared:
-            return .stopped
-        case .stopped:
-            return .stopped
-        @unknown default:
-            return .stopped
+extension WorkoutViewModel: HKLiveWorkoutBuilderDelegate {
+    func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
+        for sampleType in collectedTypes {
+            if let quantityType = sampleType as? HKQuantityType {
+                guard let statistic = workoutBuilder.statistics(for: quantityType) else {
+                    continue
+                }
+                guard let quantity = statistic.mostRecentQuantity() else {
+                    continue
+                }
+                
+                // Update the UI with new statistics...
+                DispatchQueue.main.async {
+                    print("New sample quantity: \(quantity)")
+                }
+            }
         }
+    }
+    
+    func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
+        
     }
 }

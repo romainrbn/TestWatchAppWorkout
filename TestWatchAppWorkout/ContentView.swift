@@ -7,32 +7,36 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     
-    @ObservedObject var viewModel = ViewModel()
+    @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        VStack {
-            
-            Text("Training status: \(viewModel.trainingStatus.rawValue)")
-            
-            if viewModel.trainingStatus == TrainingStatus.started {
-                Text("Heart Rate: \(Int(viewModel.heartRate)) bpm")
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
+        Group {
+            if viewModel.trainingInProgress {
+                VStack {
+                    Text("Training status: \(viewModel.trainingIsRunning ? "Running" : "Paused")")
+                    
+                    Spacer()
+                    
+                    Button {
+                        viewModel.stopWorkout()
+                    } label: {
+                        Text("Stop Workout")
+                    }
+                    
+                    Spacer()
+                }.padding()
             } else {
-                Text("Heart Rate: - bpm")
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
+                VStack {
+                    Text("Training in progress: \(viewModel.trainingInProgress ? "true" : "false")...")
+                }
             }
-            
-            Spacer()
-            
-            
-            Spacer()
-        }.padding()
+        }.onChange(of: viewModel.trainingInProgress) { newValue in
+            print("Training in progress changed! \(newValue)")
+        }
+        
+        
     }
 }
 

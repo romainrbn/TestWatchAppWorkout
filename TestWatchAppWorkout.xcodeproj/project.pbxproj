@@ -15,7 +15,7 @@
 		7E9D194A27FDCD86006D5BBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9D194927FDCD86006D5BBC /* Assets.xcassets */; };
 		7E9D195027FDCD86006D5BBC /* TestWatchAppWorkout WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E9D194F27FDCD86006D5BBC /* TestWatchAppWorkout WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E9D195527FDCD86006D5BBC /* TestWatchAppWorkoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195427FDCD86006D5BBC /* TestWatchAppWorkoutApp.swift */; };
-		7E9D195727FDCD86006D5BBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195627FDCD86006D5BBC /* ContentView.swift */; };
+		7E9D195727FDCD86006D5BBC /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195627FDCD86006D5BBC /* StartView.swift */; };
 		7E9D195927FDCD86006D5BBC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195827FDCD86006D5BBC /* NotificationController.swift */; };
 		7E9D195B27FDCD86006D5BBC /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195A27FDCD86006D5BBC /* NotificationView.swift */; };
 		7E9D195D27FDCD86006D5BBC /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D195C27FDCD86006D5BBC /* ComplicationController.swift */; };
@@ -24,8 +24,21 @@
 		7E9D197327FDCDC0006D5BBC /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197227FDCDC0006D5BBC /* WorkoutViewModel.swift */; };
 		7E9D197727FDD370006D5BBC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9D197627FDD370006D5BBC /* HealthKit.framework */; };
 		7E9D197927FDD8A2006D5BBC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197827FDD8A1006D5BBC /* ViewModel.swift */; };
-		7E9D197E27FDE0E9006D5BBC /* TrainingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197D27FDE0E9006D5BBC /* TrainingStatus.swift */; };
-		7E9D197F27FDE106006D5BBC /* TrainingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197D27FDE0E9006D5BBC /* TrainingStatus.swift */; };
+		7E9D197E27FDE0E9006D5BBC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197D27FDE0E9006D5BBC /* Helpers.swift */; };
+		7E9D197F27FDE106006D5BBC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D197D27FDE0E9006D5BBC /* Helpers.swift */; };
+		7ED8BDA727FEF66900DB5D25 /* WatchHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDA627FEF66900DB5D25 /* WatchHelpers.swift */; };
+		7ED8BDAA27FF335A00DB5D25 /* SessionPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDA927FF335A00DB5D25 /* SessionPagingView.swift */; };
+		7ED8BDAC27FF33F200DB5D25 /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDAB27FF33F200DB5D25 /* MetricsView.swift */; };
+		7ED8BDAE27FF363000DB5D25 /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDAD27FF363000DB5D25 /* ElapsedTimeView.swift */; };
+		7ED8BDB027FF38C700DB5D25 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDAF27FF38C700DB5D25 /* ControlsView.swift */; };
+		7ED8BDB227FF39D800DB5D25 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDB127FF39D800DB5D25 /* SummaryView.swift */; };
+		7ED8BDB427FF3BF000DB5D25 /* ActivityRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDB327FF3BF000DB5D25 /* ActivityRingsView.swift */; };
+		7ED8BDB727FF3DDA00DB5D25 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDB627FF3DDA00DB5D25 /* WorkoutManager.swift */; };
+		7ED8BDC328005EF500DB5D25 /* WatchConnectivitySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDC128005EF500DB5D25 /* WatchConnectivitySingleton.swift */; };
+		7ED8BDC5280062BE00DB5D25 /* NotificationNamesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDC4280062BE00DB5D25 /* NotificationNamesExtension.swift */; };
+		7ED8BDC6280062BE00DB5D25 /* NotificationNamesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDC4280062BE00DB5D25 /* NotificationNamesExtension.swift */; };
+		7ED8BDC8280067B300DB5D25 /* PhoneStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDC7280067B300DB5D25 /* PhoneStartView.swift */; };
+		7ED8BDCB280083F900DB5D25 /* PhoneSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED8BDCA280083F900DB5D25 /* PhoneSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +93,7 @@
 		7E9D194927FDCD86006D5BBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E9D194F27FDCD86006D5BBC /* TestWatchAppWorkout WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TestWatchAppWorkout WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9D195427FDCD86006D5BBC /* TestWatchAppWorkoutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWatchAppWorkoutApp.swift; sourceTree = "<group>"; };
-		7E9D195627FDCD86006D5BBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7E9D195627FDCD86006D5BBC /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		7E9D195827FDCD86006D5BBC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		7E9D195A27FDCD86006D5BBC /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		7E9D195C27FDCD86006D5BBC /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -92,7 +105,19 @@
 		7E9D197427FDD370006D5BBC /* TestWatchAppWorkout WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TestWatchAppWorkout WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7E9D197627FDD370006D5BBC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		7E9D197827FDD8A1006D5BBC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		7E9D197D27FDE0E9006D5BBC /* TrainingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
+		7E9D197D27FDE0E9006D5BBC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		7ED8BDA627FEF66900DB5D25 /* WatchHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHelpers.swift; sourceTree = "<group>"; };
+		7ED8BDA927FF335A00DB5D25 /* SessionPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPagingView.swift; sourceTree = "<group>"; };
+		7ED8BDAB27FF33F200DB5D25 /* MetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
+		7ED8BDAD27FF363000DB5D25 /* ElapsedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
+		7ED8BDAF27FF38C700DB5D25 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		7ED8BDB127FF39D800DB5D25 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		7ED8BDB327FF3BF000DB5D25 /* ActivityRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRingsView.swift; sourceTree = "<group>"; };
+		7ED8BDB627FF3DDA00DB5D25 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		7ED8BDC128005EF500DB5D25 /* WatchConnectivitySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivitySingleton.swift; sourceTree = "<group>"; };
+		7ED8BDC4280062BE00DB5D25 /* NotificationNamesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNamesExtension.swift; sourceTree = "<group>"; };
+		7ED8BDC7280067B300DB5D25 /* PhoneStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneStartView.swift; sourceTree = "<group>"; };
+		7ED8BDCA280083F900DB5D25 /* PhoneSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,10 +165,12 @@
 			isa = PBXGroup;
 			children = (
 				7E9D193927FDCD81006D5BBC /* TestWatchAppWorkoutApp.swift */,
+				7ED8BDC7280067B300DB5D25 /* PhoneStartView.swift */,
 				7E9D193B27FDCD81006D5BBC /* ContentView.swift */,
+				7E9D197827FDD8A1006D5BBC /* ViewModel.swift */,
+				7ED8BDCA280083F900DB5D25 /* PhoneSessionManager.swift */,
 				7E9D193D27FDCD84006D5BBC /* Assets.xcassets */,
 				7E9D193F27FDCD84006D5BBC /* Preview Content */,
-				7E9D197827FDD8A1006D5BBC /* ViewModel.swift */,
 			);
 			path = TestWatchAppWorkout;
 			sourceTree = "<group>";
@@ -169,15 +196,16 @@
 			children = (
 				7E9D197427FDD370006D5BBC /* TestWatchAppWorkout WatchKit Extension.entitlements */,
 				7E9D195427FDCD86006D5BBC /* TestWatchAppWorkoutApp.swift */,
-				7E9D195627FDCD86006D5BBC /* ContentView.swift */,
+				7ED8BDB627FF3DDA00DB5D25 /* WorkoutManager.swift */,
+				7ED8BDC128005EF500DB5D25 /* WatchConnectivitySingleton.swift */,
+				7ED8BDB527FF3D1B00DB5D25 /* Views */,
 				7E9D197227FDCDC0006D5BBC /* WorkoutViewModel.swift */,
-				7E9D195827FDCD86006D5BBC /* NotificationController.swift */,
-				7E9D195A27FDCD86006D5BBC /* NotificationView.swift */,
-				7E9D195C27FDCD86006D5BBC /* ComplicationController.swift */,
+				7ED8BDA827FEF67D00DB5D25 /* Unused */,
 				7E9D195E27FDCD87006D5BBC /* Assets.xcassets */,
 				7E9D196327FDCD87006D5BBC /* Info.plist */,
 				7E9D196427FDCD87006D5BBC /* PushNotificationPayload.apns */,
 				7E9D196027FDCD87006D5BBC /* Preview Content */,
+				7ED8BDA627FEF66900DB5D25 /* WatchHelpers.swift */,
 			);
 			path = "TestWatchAppWorkout WatchKit Extension";
 			sourceTree = "<group>";
@@ -201,9 +229,34 @@
 		7E9D197C27FDE0E0006D5BBC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				7E9D197D27FDE0E9006D5BBC /* TrainingStatus.swift */,
+				7E9D197D27FDE0E9006D5BBC /* Helpers.swift */,
+				7ED8BDC4280062BE00DB5D25 /* NotificationNamesExtension.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		7ED8BDA827FEF67D00DB5D25 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				7E9D195827FDCD86006D5BBC /* NotificationController.swift */,
+				7E9D195A27FDCD86006D5BBC /* NotificationView.swift */,
+				7E9D195C27FDCD86006D5BBC /* ComplicationController.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
+		7ED8BDB527FF3D1B00DB5D25 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E9D195627FDCD86006D5BBC /* StartView.swift */,
+				7ED8BDB127FF39D800DB5D25 /* SummaryView.swift */,
+				7ED8BDB327FF3BF000DB5D25 /* ActivityRingsView.swift */,
+				7ED8BDA927FF335A00DB5D25 /* SessionPagingView.swift */,
+				7ED8BDAB27FF33F200DB5D25 /* MetricsView.swift */,
+				7ED8BDAF27FF38C700DB5D25 /* ControlsView.swift */,
+				7ED8BDAD27FF363000DB5D25 /* ElapsedTimeView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +393,10 @@
 				7E9D193C27FDCD81006D5BBC /* ContentView.swift in Sources */,
 				7E9D197927FDD8A2006D5BBC /* ViewModel.swift in Sources */,
 				7E9D193A27FDCD81006D5BBC /* TestWatchAppWorkoutApp.swift in Sources */,
-				7E9D197F27FDE106006D5BBC /* TrainingStatus.swift in Sources */,
+				7ED8BDC5280062BE00DB5D25 /* NotificationNamesExtension.swift in Sources */,
+				7E9D197F27FDE106006D5BBC /* Helpers.swift in Sources */,
+				7ED8BDC8280067B300DB5D25 /* PhoneStartView.swift in Sources */,
+				7ED8BDCB280083F900DB5D25 /* PhoneSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,13 +404,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E9D197E27FDE0E9006D5BBC /* TrainingStatus.swift in Sources */,
+				7ED8BDB227FF39D800DB5D25 /* SummaryView.swift in Sources */,
+				7E9D197E27FDE0E9006D5BBC /* Helpers.swift in Sources */,
+				7ED8BDB727FF3DDA00DB5D25 /* WorkoutManager.swift in Sources */,
 				7E9D195927FDCD86006D5BBC /* NotificationController.swift in Sources */,
-				7E9D195727FDCD86006D5BBC /* ContentView.swift in Sources */,
+				7E9D195727FDCD86006D5BBC /* StartView.swift in Sources */,
 				7E9D195D27FDCD86006D5BBC /* ComplicationController.swift in Sources */,
+				7ED8BDB027FF38C700DB5D25 /* ControlsView.swift in Sources */,
 				7E9D195527FDCD86006D5BBC /* TestWatchAppWorkoutApp.swift in Sources */,
+				7ED8BDC6280062BE00DB5D25 /* NotificationNamesExtension.swift in Sources */,
+				7ED8BDC328005EF500DB5D25 /* WatchConnectivitySingleton.swift in Sources */,
+				7ED8BDAE27FF363000DB5D25 /* ElapsedTimeView.swift in Sources */,
 				7E9D197327FDCDC0006D5BBC /* WorkoutViewModel.swift in Sources */,
+				7ED8BDB427FF3BF000DB5D25 /* ActivityRingsView.swift in Sources */,
+				7ED8BDAC27FF33F200DB5D25 /* MetricsView.swift in Sources */,
 				7E9D195B27FDCD86006D5BBC /* NotificationView.swift in Sources */,
+				7ED8BDA727FEF66900DB5D25 /* WatchHelpers.swift in Sources */,
+				7ED8BDAA27FF335A00DB5D25 /* SessionPagingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,12 +557,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestWatchAppWorkout WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestWatchAppWorkout WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TestWatchAppWorkout WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = TestWatchAppWorkout_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to your data to read your heart rate and display it in the app.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to your data to update your list of workouts.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -505,7 +573,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -524,12 +592,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestWatchAppWorkout WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestWatchAppWorkout WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TestWatchAppWorkout WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = TestWatchAppWorkout_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to your data to read your heart rate and display it in the app.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to your data to update your list of workouts.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -538,7 +608,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -558,14 +628,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = TestWatchAppWorkout_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = "TestWatchAppWorkout WatchKit App";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.romainrbn.TestWatchAppWorkout;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.romainrbn.watchTests;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -584,14 +654,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = TestWatchAppWorkout_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = "TestWatchAppWorkout WatchKit App";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.romainrbn.TestWatchAppWorkout;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.romainrbn.watchTests;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -611,7 +681,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestWatchAppWorkout/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -625,7 +695,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -642,7 +712,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestWatchAppWorkout/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RJMXK9G5M;
+				DEVELOPMENT_TEAM = 2NB7KR2A8L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -656,7 +726,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.TestWatchAppWorkout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romainrbn.watchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
