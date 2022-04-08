@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @EnvironmentObject var viewModel: ViewModel
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         Group {
             if viewModel.trainingInProgress {
@@ -33,7 +35,9 @@ struct ContentView: View {
                 }
             }
         }.onChange(of: viewModel.trainingInProgress) { newValue in
-            print("Training in progress changed! \(newValue)")
+            if !newValue {
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
         
         

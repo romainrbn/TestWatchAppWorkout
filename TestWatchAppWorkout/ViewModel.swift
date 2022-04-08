@@ -17,17 +17,24 @@ class ViewModel: NSObject, ObservableObject {
                 return
             }
             
-            startWorkout()
+            startWorkout(retry: false)
         }
     }
     
     var session: WCSession
+    
+    enum SessionError: Error {
+        case noSession
+    }
     
     // the training is not stopped
     @Published var trainingInProgress = false
     
     // the training is not paused
     @Published var trainingIsRunning = false
+    
+    let healthStore = HKHealthStore()
+
     
     override init() {
         let defaultSesssion = WCSession.default
@@ -43,23 +50,45 @@ class ViewModel: NSObject, ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(workoutDidStop), name: .workoutDidStop, object: nil)
     }
     
-    func startWorkout() { // Passer le type de workout ici
-        self.session.sendMessage([String.trainingIsRunning: true]) { replies in
-//            if let reply = replies["watchStatus"] as? String, reply == "workoutDidStart" {
-//                DispatchQueue.main.async {
-//                    self.trainingInProgress = true
-//                    self.trainingIsRunning = true
-//                }
-//            } else {
-//                print("Workout could not start...")
-//            }
-            DispatchQueue.main.async {
-                self.trainingInProgress = true
-                self.trainingIsRunning = true
+    func startWorkout(retry: Bool) { // Passer le type de workout ici
+        
+        openWatchApp(retry: retry) { result in
+            switch result {
+                case .success(_):
+                    self.session.sendMessage([String.trainingIsRunning: true]) { replies in
+                        DispatchQueue.main.async {
+                            self.trainingInProgress = true
+                            self.trainingIsRunning = true
+                            
+                        }
+                    } errorHandler: { error in
+                        print("Error while sending the message: \(error.localizedDescription)")
+                        return
+                    }
+                case .failure(let error):
+                    print(error)
+                    return
             }
-        } errorHandler: { error in
-            print(error.localizedDescription)
-            return
+        }
+    }
+    
+    func openWatchApp(retry: Bool, completion: @escaping (Result<Bool, SessionError>)->()) {
+        
+        if retry {
+            completion(.success(true))
+        }
+        
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .coreTraining
+        configuration.locationType = .indoor
+        healthStore.startWatchApp(with: configuration) { success, error in
+            guard success, error == nil else {
+                print("Error while starting AW App: \(error!.localizedDescription)")
+                completion(.failure(.noSession))
+                return
+            }
+            
+            completion(.success(true))
         }
     }
     
@@ -113,6 +142,7 @@ extension ViewModel: WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("WCActivation Complete for iPhone!")
+        self.startWorkout(retry: true)
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
